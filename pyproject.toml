@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vega-train-sdk"
+version = "0.1.0"
+description = "Governed training: environment, data and plan cards, human-committed runs, DAG-frozen checkpoints, and a freeze card that ties the weights to everything that made them."
+requires-python = ">=3.10"
+dependencies = ["cryptography>=42", "vega-custody-sdk", "vega-governance-jacket-sdk", "vega-harness-sdk", "vega-pareah-sdk", "vega-dkg-lattice-sdk", "vega-superproof-sdk", "numpy", "safetensors"]
+license = {file = "LICENSE"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
