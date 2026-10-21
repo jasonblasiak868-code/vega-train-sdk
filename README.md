@@ -2,6 +2,18 @@
 
 ![vega-train-sdk](assets/tile.svg)
 
+<!-- vega-install-order -->
+> **Build order: 8/8. This kit needs 7 other Vega kits installed first.** Install them in this order, then this one:
+> 1/8 `vega-custody-sdk`  
+> 2/8 `vega-governance-jacket-sdk`  
+> 3/8 `vega-librarian-sdk`  
+> 4/8 `vega-harness-sdk`  
+> 5/8 `vega-dkg-lattice-sdk`  
+> 6/8 `vega-superproof-sdk`  
+> 7/8 `vega-pareah-sdk`  
+> 8/8 `vega-train-sdk` (this kit)
+> Install each with `pip install --no-deps git+https://github.com/jasonblasiak868-code/<name>` in the order shown, plus `pip install cryptography numpy safetensors`. Full steps: [INTEGRATION_GUIDE](https://github.com/jasonblasiak868-code/vega-umbrella-sdk/blob/main/INTEGRATION_GUIDE.md).
+
 The layer-8 ("learn") owner of the Vega SDK family: **governed model training and freeze cards**. This kit records exactly what a model learned from — which bytes, under which licence, on which machine, under which plan, with which held-out tests kept separate, what got frozen — and which human authorised the run with a single-use signature. It exists to prevent one failure: months after training, nobody can honestly answer "what did this model learn from, and who said yes?" Say it plainly: **this kit governs training; it does not ship the trainers.** GPU and large-language-model trainers are plug-ins, not included. Two small reference back ends (a deterministic numpy network and a CPU torch template using safetensors) come with the repo so the whole governed path can be exercised and replayed end to end.
 
 > **Licensing.** Source-available, not open source. Free for personal use; free for registered small businesses (under US$1M revenue and valuation); everyone else needs a commercial license (see LICENSE; for a commercial license write to jasonblasiak.ai.mail@gmail.com). Patent pending. Draft licence text, not yet reviewed by an attorney.
