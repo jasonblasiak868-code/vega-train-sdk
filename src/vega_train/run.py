@@ -115,7 +115,7 @@ class _RunLock:
 
 
 class TrainingRun:
-    def __init__(self, run_dir, plan, env, data, pre_card, data_root, commitment_check=None, burn=None, trainer=None, clock=time.time, on_event=None):
+    def __init__(self, run_dir, plan, env, data, pre_card, data_root, commitment_check=None, burn=None, trainer=None, clock=time.time, on_event=None, pre_deck=None):
         for label, c, kind in (("plan", plan, "TRAIN_PLAN"), ("environment", env, "ENV"), ("data", data, "DATA"), ("PRE", pre_card, "PRE")):
             if not cards.intact(c, kind):
                 raise TrainRefused(f"the {label} card is altered or not a {kind} card")
@@ -124,6 +124,7 @@ class TrainingRun:
         self.run_dir = os.path.abspath(run_dir)
         self.plan, self.env, self.data, self.pre, self.data_root = plan, env, data, pre_card, data_root
         self.commitment_check, self.clock, self.on_event = commitment_check, clock, on_event
+        self.pre_deck = pre_deck                       # optional PreDeck: a PRE revoked there cannot start a run and halts one in progress at its next step
         self.trainer = trainer if trainer is not None else trainers.make(plan["trainer"])
         os.makedirs(self.run_dir, exist_ok=True)
         self.chain = RecordChain(os.path.join(self.run_dir, "RUN.jsonl"))
@@ -168,7 +169,12 @@ class TrainingRun:
         return os.path.join(self.run_dir, "checkpoints", "ckpt_%08d.bin" % step)
 
     # ------------------------------------------------------------------ gates
+    def _pre_revoked(self):
+        return self.pre_deck is not None and self.pre_deck.is_revoked(self.pre["card_hash"])
+
     def _gate(self, commitment, action):
+        if self._pre_revoked():
+            raise TrainRefused("the PRE has been revoked")
         for res in ("model/" + self.plan["name"], "dataset/" + self.data["name"]):
             if not pre_mod.permits(self.pre, "train", res):
                 raise TrainRefused(f"the PRE does not permit 'train' on {res!r} (or it expired)")
@@ -208,6 +214,8 @@ class TrainingRun:
         p = self.plan
         losses = []
         while step < p["steps"]:
+            if self._pre_revoked():
+                return self._halt("the PRE was revoked", last)
             if self.clock() - t0 > p["max_wall_seconds"]:
                 return self._halt("wall-clock budget of %d seconds used up" % p["max_wall_seconds"], last)
             n = min(p["checkpoint_every"] - step % p["checkpoint_every"], p["steps"] - step)

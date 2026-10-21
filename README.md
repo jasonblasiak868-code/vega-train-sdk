@@ -82,7 +82,7 @@ The full path (`prepare` a spec, sign a commitment in your own terminal, `start`
 
 ## Tests
 
-STATUS.md: **115 tests in 7 files, all passing** — `test_train.py`, `test_lattice_data.py`, `test_conduct.py`, `test_cli.py`, `test_bundle.py`, plus the two red-team files `redteam_1_run_integrity.py` and `redteam_2_cards_freeze_verify.py` (`mutations_conduct.py` and `mutations_lattice.py` are mutation helpers; `support.py` is shared test scaffolding). REVIEW.md's automated run reports 67 tests ok across 4 test files plus both red-team files, with 0 high / 0 medium / 0 low findings and 1 reviewed info note.
+STATUS.md: **118 tests in 8 files, all passing** — `test_train.py`, `test_lattice_data.py`, `test_conduct.py`, `test_cli.py`, `test_bundle.py`, plus the two red-team files `redteam_1_run_integrity.py` and `redteam_2_cards_freeze_verify.py` (`mutations_conduct.py` and `mutations_lattice.py` are mutation helpers; `support.py` is shared test scaffolding). REVIEW.md's automated run reports 67 tests ok across 4 test files plus both red-team files, with 0 high / 0 medium / 0 low findings and 1 reviewed info note.
 
 To run: put this repo's `src/` and the dependency repos' `src/` directories on `PYTHONPATH`, then run each file in `tests/` (e.g. `python tests/test_train.py`).
 

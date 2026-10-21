@@ -201,7 +201,7 @@ No SDK in the public family requires this one; it is the family's most-connected
 
 ## 7. Conformance
 
-A third party verifies this specification by running `tests/`: put this repo's `src/` and the six dependency repos' `src/` directories on `PYTHONPATH` and run each test file. STATUS.md records 115 tests in 7 files, all passing; REVIEW.md's automated run reports 67 tests ok (4 test files plus both red-team files) with no high, medium or low findings.
+A third party verifies this specification by running `tests/`: put this repo's `src/` and the six dependency repos' `src/` directories on `PYTHONPATH` and run each test file. STATUS.md records 118 tests in 8 files, all passing; REVIEW.md's automated run reports 67 tests ok (4 test files plus both red-team files) with no high, medium or low findings.
 
 Passing means: the guarantees in §4.1 hold for the published reference implementation on the test inputs — commitments gate runs, records and hashes bind every claim, refusals are fail-closed, and the verifier recomputes everything from files.
 

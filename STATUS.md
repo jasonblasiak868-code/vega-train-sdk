@@ -15,7 +15,7 @@
 - behavior_eval
 - __main__
 
-Tests: 115 tests in 7 files, all passing.
+Tests: 118 tests in 8 files, all passing.
 
 ## DESIGNED ONLY (not built)
 
