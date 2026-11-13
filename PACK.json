@@ -1,0 +1,16 @@
+{
+ "pack": "PACK-COMPUTE",
+ "repo": "vega-train-sdk",
+ "members": [
+  "vega-superproof-sdk",
+  "vega-metacog-sdk",
+  "vega-train-sdk",
+  "vega-trace-sdk",
+  "vega-chip-sdk",
+  "vega-terminal-sdk"
+ ],
+ "requires": [],
+ "dkg_anchor": "DKG-REPO-PACKS-20261113",
+ "version": "v0.1",
+ "disclosed": "2026-11-13"
+}
